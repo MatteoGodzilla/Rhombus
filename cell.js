@@ -1,8 +1,8 @@
-class cell{
+class Cell{
 	constructor(x,y,block){
 		this.x = x;
 		this.y = y;
-		this.block = 1;
+		this.block = block;
 		this.size = 40;
 	}
 	show(){
