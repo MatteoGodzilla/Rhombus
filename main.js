@@ -1,17 +1,20 @@
 let m = new Matrix(5,10);
 let padding = 20;
 let p = new Player(118,500);
-
+let l ;
 function setup() {
     createCanvas(600, 600);
-	p.linkMatrix(m);
+    p.linkMatrix(m);
+    l = setInterval(() => {
+        m.tick();
+    }, 500);
 }
 
 
 function draw(){
     background(51);
     p.show();
-	m.show();
+    m.show();
 } 
 
 function keyPressed(){

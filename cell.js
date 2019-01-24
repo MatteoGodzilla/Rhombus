@@ -14,4 +14,7 @@ class Cell{
 			rect(this.x*this.size,this.y*this.size,this.size-1,this.size-1);
 		pop();
 	}
+	setblock(block){
+		this.block = block;
+	}
 }
