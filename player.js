@@ -5,6 +5,8 @@ class Player {
         this.pos = 0;
         this.locked = undefined;
         this.buckets = new Array(3);
+		this.matrix = undefined;
+		this.rot = 0;
     }
 
     kd(key) {
@@ -16,6 +18,12 @@ class Player {
             this.pos = 1;
             this.locked = 'd';
         }
+		if(keyCode == LEFT_ARROW){
+			this.rot--;
+		}else if(keyCode == RIGHT_ARROW){
+			this.rot++;
+		}
+		console.log(this.rot);
     }
     ku(key) {
         if (key == this.locked) {
@@ -25,7 +33,15 @@ class Player {
     }
     show() {
         push();
-            ellipse(this.x+this.pos*30,this.y,30,30);
+            ellipse(this.x+this.pos*40,this.y,40,40);
+			rectMode(CENTER);
+			rect(this.x+this.pos*40,this.y-41,40,40);
+			rect(this.x+this.pos*40-40,this.y-41,40,40);
+			rect(this.x+this.pos*40+40,this.y-41,40,40);
         pop();
     }
+	linkMatrix(matrix){
+		this.matrix = matrix;
+	}
+	
 }
