@@ -1,5 +1,5 @@
 class Matrix {
-	constructor(x, y, rows, cols) {
+	constructor(x, y, rows, cols,red) {
 		this.x = x;
 		this.y = y;
 		this.value = new Array(rows);
@@ -9,7 +9,7 @@ class Matrix {
 		}
 		for (let i = 0; i < this.value.length; i++) {
 			for (let j = 0; j < this.value[0].length; j++) {
-				this.value[i][j] = new Cell(i, j, -1)
+				this.value[i][j] = new Cell(i, j, -1);
 			}
 		}
 	}
@@ -45,6 +45,13 @@ class Matrix {
 				}
 			}
 
+		}
+	}
+	setgr(red){
+		for(let row of this.value){
+			for(let col of row){
+				col.setgr(red);
+			}
 		}
 	}
 }

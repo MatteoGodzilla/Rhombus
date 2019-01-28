@@ -7,6 +7,13 @@ buks[0] = new Bucket(80, 460, 0);
 buks[1] = new Bucket(120, 460, 1);
 buks[2] = new Bucket(160, 460, 2);
 
+function preload(){
+    let r = loadImage('res/red.png');
+    let g = loadImage('res/green.png');
+    let b = loadImage('res/blue.png');
+    m.setgr([r,g,b]);
+}
+
 function setup() {
     createCanvas(600, 600);
     p.linkMatrix(m);

@@ -4,17 +4,26 @@ class Cell {
 		this.y = y;
 		this.block = block;
 		this.size = 40;
+		this.gr = new Array(3);
 	}
 	show() {
 		push();
-		if (this.block == 0) fill(255, 0, 0); //rosso
-		else if (this.block == 1) fill(0, 255, 0); //verde
-		else if (this.block == 2) fill(0, 0, 255); //blu
-		else fill(255, 255, 255); //bianco
-		rect(this.x * this.size, this.y * this.size, this.size - 1, this.size - 1);
+		if (this.gr != undefined) {
+			if (this.block == 0) image(this.gr[0], this.x * this.size, this.y * this.size, this.size, this.size);
+			else if (this.block == 1) image(this.gr[1], this.x * this.size, this.y * this.size, this.size, this.size);
+			else if (this.block == 2) image(this.gr[2], this.x * this.size, this.y * this.size, this.size, this.size);
+			else {
+				fill(127);
+				rect(this.x * this.size, this.y * this.size, this.size, this.size);
+			}
+		}
+
 		pop();
 	}
 	setblock(block) {
 		this.block = block;
+	}
+	setgr(images) {
+		this.gr = images;
 	}
 }

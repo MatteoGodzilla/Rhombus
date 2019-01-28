@@ -11,9 +11,9 @@ class Bucket {
     show() {
         push();
         rectMode(CENTER);
-        if (this.color == 0) fill(255, 0, 0);
-        else if (this.color == 1) fill(0, 255, 0);
-        else if (this.color == 2) fill(0, 0, 255);
+        if (this.color == 0) fill(127, 0, 0);
+        else if (this.color == 1) fill(0, 127, 0);
+        else if (this.color == 2) fill(0, 0, 127);
         else fill(255);
         rect(this.x + this.pos * this.size, this.y, this.size, this.size);
         pop();
