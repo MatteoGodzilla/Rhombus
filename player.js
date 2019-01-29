@@ -3,21 +3,20 @@ class Player {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.pos = 0;
+        this.pos = 1;
         this.locked = undefined;
         this.buckets = undefined;
         this.matrix = undefined;
-        //this.rot = 2;
     }
 
     kd(key) {
         if (key == 'a') {
-            this.pos = -1;
+            this.pos = 0;
             this.locked = 'a';
             this.left();
         } else
         if (key == 'd') {
-            this.pos = 1;
+            this.pos = 2;
             this.locked = 'd';
             this.right();
         }
@@ -29,16 +28,27 @@ class Player {
     }
     ku(key) {
         if (key == this.locked) {
-            this.pos = 0;
+            this.pos = 1;
             this.locked = undefined;
             this.center();
         }
     }
     show() {
         push();
-        ellipse(this.x + this.pos * 40, this.y, 40, 40);
+        ellipse(this.x+this.pos*40, this.y, 40, 40);
         for (let bucket of this.buckets) bucket.show();
         pop();
+    }
+    clear() {
+        if (this.matrix !== undefined) {
+            for (let i = 0; i < this.buckets.length; i++) {
+                let index = i + this.pos;
+                let b = this.matrix.value[index][9];
+                if(this.buckets[i].color == b.block){
+                    this.matrix.value[index][9].setblock(-1);
+                }
+            }
+        }
     }
     linkMatrix(matrix) {
         this.matrix = matrix;

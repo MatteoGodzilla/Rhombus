@@ -1,6 +1,6 @@
 let m = new Matrix(20, 20, 5, 10);
 //let padding = 20;
-let p = new Player(118, 500);
+let p = new Player(78, 500);
 let beat;
 let buks = new Array(3);
 buks[0] = new Bucket(80, 460, 0);
@@ -22,30 +22,31 @@ function setup() {
     beat = setInterval(() => {
         m.tick();
     }, 500);
-    setTimeout(() => {
+    /*setTimeout(() => {
         stop();
-    }, 10000);
+    }, 10000);*/
 }
 
 
 function draw() {
     background(51);
     p.show();
+    p.clear();
     m.show();
 }
 
 function keyPressed() {
-    p.kd(key) //trasferisce l' evento al player
+    p.kd(key) ;//trasferisce l' evento al player
 }
 
 function keyReleased() {
-    p.ku(key) //trasferisce l' evento al player
+    p.ku(key); //trasferisce l' evento al player
 }
 
 function stop() {
     noLoop();
     clearInterval(beat);
-    console.log("STOP!")
+    console.log("STOP!");
 }
 
 /*function mousePressed(){
