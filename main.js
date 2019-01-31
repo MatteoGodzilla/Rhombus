@@ -12,6 +12,9 @@ function preload(){
     let g = loadImage('res/green.png');
     let b = loadImage('res/blue.png');
     m.setgr([r,g,b]);
+
+    let grid = loadImage('res/grid.png');
+    m.setImage(grid);
 }
 
 function setup() {
@@ -19,9 +22,10 @@ function setup() {
     p.linkMatrix(m);
     p.linkBuckets(buks);
 
-    beat = setInterval(() => {
+    /*beat = setInterval(() => {
         m.tick();
     }, 500);
+    */
     /*setTimeout(() => {
         stop();
     }, 10000);*/
@@ -37,6 +41,7 @@ function draw() {
 
 function keyPressed() {
     p.kd(key) ;//trasferisce l' evento al player
+    if(key == ' ')m.tick(); //debug
 }
 
 function keyReleased() {
