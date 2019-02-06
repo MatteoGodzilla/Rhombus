@@ -22,13 +22,13 @@ function setup() {
     p.linkMatrix(m);
     p.linkBuckets(buks);
 
-    /*beat = setInterval(() => {
+    beat = setInterval(() => {
         m.tick();
     }, 500);
-    */
-    /*setTimeout(() => {
+    
+    /* setTimeout(() => {
         stop();
-    }, 10000);*/
+    }, 10000); */
 }
 
 

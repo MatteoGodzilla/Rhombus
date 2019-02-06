@@ -4,7 +4,8 @@ class Matrix {
 		this.y = y;
 		this.image = undefined;
 		this.value = new Array(rows);
-		this.buffer = [];
+		this.buffer = [0, 1, 2, 3, 4];
+		this.col = 50;
 
 		for (let i = 0; i < this.value.length; i++) {
 			this.value[i] = new Array(cols);
@@ -35,20 +36,25 @@ class Matrix {
 		this.move();
 	}
 	generate() {
-		let col = floor(random() * this.value.length);
+		this.buffer = [0, 1, 2, 3, 4];
+		this.buffer.splice(this.col, 1);
+		let newcol = floor(random() * (this.value.length-1));
+		if(this.col == newcol){
+			newcol = this.buffer[0];
+		}
 		let color = floor(random() * 3);
-		this.value[col][0].setblock(color);
-		this.value[col][0].new = true;
+		this.value[this.buffer[newcol]][0].new = true;
+		this.value[this.buffer[newcol]][0].setblock(color);
+		this.col = newcol;
 	}
 	move() {
-		for (let cols = this.value.length-1; cols >= 0; cols--) {
+		for (let cols = this.value.length - 1; cols >= 0; cols--) {
 			for (let rows = this.value[0].length - 2; rows >= 0; rows--) {
 				let current = this.value[cols][rows];
 				let next = this.value[cols][rows + 1];
-				if(current.new == true){
+				if (current.new == true) {
 					current.new = false;
-				}
-				else if (next.block === -1 && current.block != -1) {
+				} else if (next.block === -1 && current.block != -1) {
 					next.setblock(current.block);
 					current.setblock(-1);
 				}

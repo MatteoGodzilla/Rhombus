@@ -7,6 +7,7 @@ class Player {
         this.locked = undefined;
         this.buckets = undefined;
         this.matrix = undefined;
+        this.score = 0;
     }
 
     kd(key) {
@@ -46,6 +47,7 @@ class Player {
                 let b = this.matrix.value[index][9];
                 if(this.buckets[i].color == b.block){
                     this.matrix.value[index][9].setblock(-1);
+                    this.score += 1;
                 }
             }
         }
