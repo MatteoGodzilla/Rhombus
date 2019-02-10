@@ -8,6 +8,7 @@ class Player {
         this.buckets = undefined;
         this.matrix = undefined;
         this.score = 0;
+        this.padding = 6;
     }
 
     kd(key) {
@@ -38,6 +39,13 @@ class Player {
         push();
         ellipse(this.x+this.pos*40, this.y, 40, 40);
         for (let bucket of this.buckets) bucket.show();
+        textSize(20);
+        fill(255);
+        let t = "";
+        let l = this.score.toString.length;
+        for(let i = 0; i < this.padding-l;i++){t+='0'}
+        t+=this.score;
+        text(t, this.x+7, this.y+40);//provvisorio
         pop();
     }
     clear() {
