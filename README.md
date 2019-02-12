@@ -1,3 +1,4 @@
 # Rhombus
 Tetris/Music/Yoshi's cookie clone
-you can play this game at matteogodzilla.github.io/Rhombus
+
+you can play this game at https://matteogodzilla.github.io/Rhombus
