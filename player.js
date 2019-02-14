@@ -41,11 +41,8 @@ class Player {
         for (let bucket of this.buckets) bucket.show();
         textSize(20);
         fill(255);
-        let t = "";
-        let l = this.score.toString.length;
-        for(let i = 0; i < this.padding-l;i++){t+='0'}
-        t+=this.score;
-        text(t, this.x+7, this.y+40);//provvisorio
+        textAlign(CENTER);
+        text(this.score, this.x+40, this.y+40);//provvisorio
         pop();
     }
     clear() {

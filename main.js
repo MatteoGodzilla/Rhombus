@@ -1,5 +1,6 @@
 let m = new Matrix(20, 20, 5, 10); //matrice dove scendono i blocchi
 let p = new Player(78, 500); //giocatore, duh
+let s = new Speaker(300,150);//speaker
 let beat;   //thread separato per gestire la velocità
 let buks = new Array(3); //creazione secchi per giocatore
 buks[0] = new Bucket(80, 460, 0);  
@@ -7,7 +8,7 @@ buks[1] = new Bucket(120, 460, 1);
 buks[2] = new Bucket(160, 460, 2); 
 
 function preload(){
-    let defaultpath = "res/skin2/"; //percorso file risorse---cambiando questo cambia la skin visualizata
+    let defaultpath = "res/skin2/"; //percorso file risorse --- cambiando questo cambia la skin visualizata
     let r = loadImage(defaultpath+'red.png'); //caricamento immagini
     let g = loadImage(defaultpath+'green.png');
     let b = loadImage(defaultpath+'blue.png');
@@ -21,11 +22,8 @@ function setup() {
     createCanvas(600, 600); // base p5.js
     p.linkMatrix(m); //collegamento giocatore-matrice
     p.linkBuckets(buks); //collegamento giocatore-secchi
-
-    //creazione thread
-    beat = setInterval(() => {
-        m.tick();
-    }, 500);
+    s.linkMatrix(m);//collegamento speaker-matrice
+    s.start(120);//speaker start
     
     //messo per funzione di debug
     /* setTimeout(() => {
@@ -39,6 +37,7 @@ function draw() {
     p.show(); //mostra il giocatore
     p.clear(); //il giocatore tenta di pulire blocchi
     m.show(); //mostra la matrice
+    s.show();
 }
 
 function keyPressed() {
@@ -52,8 +51,8 @@ function keyReleased() {
 
 function stop() {
     noLoop();
-    clearInterval(beat);
     console.log("STOP!");
+    s.stop();
 }
 
 //debug o creazione grafica
