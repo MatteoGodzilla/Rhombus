@@ -22,10 +22,10 @@ class Matrix {
 		push();
 		translate(this.x, this.y);
 		if (this.image != undefined) {
-			image(this.image, -1, -1, this.width + 1, this.height + 1);
+			image(this.image, 0, 0, this.width, this.height );
 		}else{
 			fill(128,128);
-			rect(0,0,this.width+1,this.height+1);
+			rect(0,0,this.width,this.height);
 		}
 		for (let cols = 0; cols < this.value.length; cols++) {
 			for (let rows = 0; rows < this.value[0].length; rows++) {
@@ -64,10 +64,24 @@ class Matrix {
 			}
 		}
 	}
-	setgr(gr) {
+	setr(gr) {
 		for (let row of this.value) {
 			for (let col of row) {
-				col.setgr(gr);
+				col.setr(gr);
+			}
+		}
+	}
+	setg(gr) {
+		for (let row of this.value) {
+			for (let col of row) {
+				col.setg(gr);
+			}
+		}
+	}
+	setb(gr) {
+		for (let row of this.value) {
+			for (let col of row) {
+				col.setb(gr);
 			}
 		}
 	}

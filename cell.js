@@ -4,30 +4,51 @@ class Cell {
 		this.y = y;
 		this.block = -1;
 		this.size = 40;
-		this.gr = undefined;
+		this.r = undefined;
+		this.g = undefined;
+		this.b = undefined;
 		this.new = false;
 		this.padding = 2;
 	}
 	show() {
 		push();
-		if (this.gr != undefined) {
-			if (this.block == 0) image(this.gr[0], this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
-			else if (this.block == 1) image(this.gr[1], this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
-			else if (this.block == 2) image(this.gr[2], this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
-		}else{
-			if(this.block == 0)fill(255,0,0);
-			else if (this.block == 1)fill(0,255,0);
-			else if (this.block == 2)fill(0,0,255);
-			else fill(0,0);
-			rect(this.x+this.padding,this.y+this.padding,this.size-(this.padding*2),this.size-(this.padding*2));
+		if(this.block == 0){
+			if (this.r != undefined) {
+				image(this.r, this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
+			}else {
+				fill(255,0,0);
+				rect(this.x+this.padding,this.y+this.padding,this.size-(this.padding*2),this.size-(this.padding*2));
+			}
+		}
+		if(this.block == 1){
+			if (this.g != undefined) {
+				image(this.g, this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
+			}else {
+				fill(0,255,0);
+				rect(this.x+this.padding,this.y+this.padding,this.size-(this.padding*2),this.size-(this.padding*2));
+			}
+		}
+		if(this.block == 2){
+			if (this.b != undefined) {
+				image(this.b, this.x+this.padding, this.y+this.padding, this.size-(this.padding*2), this.size-(this.padding*2));
+			}else {
+				fill(0,0,255);
+				rect(this.x+this.padding,this.y+this.padding,this.size-(this.padding*2),this.size-(this.padding*2));
+			}
 		}
 		pop();
 	}
 	setblock(block) {
 		this.block = block;
 	}
-	setgr(images) {
-		this.gr = images;
+	setr(im) {
+		this.r = im;
+	}
+	setg(im) {
+		this.g = im;
+	}
+	setb(im) {
+		this.b = im;
 	}
 	setpadding(value){
 		this.padding = value;

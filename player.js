@@ -22,9 +22,9 @@ class Player {
             this.locked = 'd';
             this.right();
         }
-        if (keyCode == LEFT_ARROW) {
+        if (key == 'j') {
             this.rotl();
-        } else if (keyCode == RIGHT_ARROW) {
+        } else if (key == 'l') {
             this.rotr();
         }
     }
