@@ -1,30 +1,40 @@
-//TODO REFACTOR
 class Player {
-    constructor(x, y) {
+    constructor(x, y,options) {
         this.x = x;
         this.y = y;
         this.pos = 1;
         this.locked = undefined;
-        this.buckets = undefined;
+        this.buckets = new Array(3);
         this.matrix = undefined;
         this.score = 0;
-        this.padding = 6;
+
+        this.buckets[0] = new Bucket(this.x, this.y-40, 0);  
+        this.buckets[1] = new Bucket(this.x+40,this.y-40, 1); 
+        this.buckets[2] = new Bucket(this.x+80, this.y-40, 2);
+
+        this.moveleftkey = options.left;
+        this.moverightkey = options.right;
+        this.shiftleft = options.shiftleft;
+        this.shiftright = options.shiftright;
+
+        document.body.addEventListener('keydown',ev=>this.kd(ev.key),false);
+        document.body.addEventListener('keyup',ev=>this.ku(ev.key),false);
     }
 
     kd(key) {
-        if (key == 'a') {
+        if (key == this.moveleftkey) {
             this.pos = 0;
-            this.locked = 'a';
+            this.locked = this.moveleftkey;
             this.left();
         } else
-        if (key == 'd') {
+        if (key == this.moverightkey) {
             this.pos = 2;
-            this.locked = 'd';
+            this.locked = this.moverightkey;
             this.right();
         }
-        if (key == 'j') {
+        if (key == this.shiftleft) {
             this.rotl();
-        } else if (key == 'l') {
+        } else if (key == this.shiftright) {
             this.rotr();
         }
     }

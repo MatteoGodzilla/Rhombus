@@ -26,7 +26,7 @@ class Speaker {
         this.thread = setInterval(() => {
             //function beat
             this.frame = 0;
-            m.tick();
+            this.m.tick();
         }, 60000 / this.vel);
     }
     stop() {
