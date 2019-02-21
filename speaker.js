@@ -5,7 +5,7 @@ class Speaker {
         this.r = 60;
         this.thread = undefined;
         this.vel = 0;
-        this.m = undefined;
+        this.games = [];
         this.frame = 0;
     }
     show() {
@@ -26,13 +26,19 @@ class Speaker {
         this.thread = setInterval(() => {
             //function beat
             this.frame = 0;
-            this.m.tick();
+            for(let g of this.games){
+                g.tick();
+            }
         }, 60000 / this.vel);
     }
     stop() {
         clearInterval(this.thread);
     }
-    linkMatrix(m) {
-        this.m = m;
+    addGame(g) {
+        this.games.push(g);
+    }
+    removeGame(game){
+        let index = this.games.indexOf(game);
+        this.games.splice(index,1);
     }
 }

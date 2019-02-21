@@ -12,7 +12,7 @@ class Matrix {
 		}
 		for (let i = 0; i < this.value.length; i++) {
 			for (let j = 0; j < this.value[0].length; j++) {
-				this.value[i][j] = new Cell(i*this.colSize, j*this.colSize);
+				this.value[i][j] = new Cell(i * this.colSize, j * this.colSize);
 			}
 		}
 		this.width = this.value[0][0].size * this.value.length;
@@ -22,10 +22,10 @@ class Matrix {
 		push();
 		translate(this.x, this.y);
 		if (this.image != undefined) {
-			image(this.image, 0, 0, this.width, this.height );
-		}else{
-			fill(128,128);
-			rect(0,0,this.width,this.height);
+			image(this.image, 0, 0, this.width, this.height);
+		} else {
+			fill(128, 128);
+			rect(0, 0, this.width, this.height);
 		}
 		for (let cols = 0; cols < this.value.length; cols++) {
 			for (let rows = 0; rows < this.value[0].length; rows++) {
@@ -41,8 +41,8 @@ class Matrix {
 	generate() {
 		this.buffer = [0, 1, 2, 3, 4];
 		this.buffer.splice(this.pastCol, 1);
-		let newcol = floor(random() * (this.value.length-1));
-		if(this.pastCol == newcol){
+		let newcol = floor(random() * (this.value.length - 1));
+		if (this.pastCol == newcol) {
 			newcol = this.buffer[0];
 		}
 		let color = floor(random() * 3);
@@ -88,9 +88,9 @@ class Matrix {
 	setImage(Image) {
 		this.image = Image;
 	}
-	setpadding(value){
-		for(let row of this.value){
-			for(let c of row){
+	setpadding(value) {
+		for (let row of this.value) {
+			for (let c of row) {
 				c.setpadding(value);
 			}
 		}
