@@ -14,26 +14,26 @@ class Bucket {
     show() {
         push();
         if (this.color == 0) {
-            if (this.r != undefined) image(this.r, this.x+this.size*this.pos-this.size/2, this.y-this.size/2,this.size,this.size);
+            if (this.r != undefined) image(this.r, this.x + this.size * this.pos - this.size / 2, this.y - this.size / 2, this.size, this.size);
             else {
                 fill(127, 0, 0);
-                rect(this.x+this.size*this.pos, this.y,this.size,this.size);
+                rect(this.x + this.size * this.pos, this.y, this.size, this.size);
             }
         } else if (this.color == 1) {
-            if (this.g != undefined) image(this.g, this.x+this.size*this.pos-this.size/2, this.y-this.size/2,this.size,this.size);
+            if (this.g != undefined) image(this.g, this.x + this.size * this.pos - this.size / 2, this.y - this.size / 2, this.size, this.size);
             else {
                 fill(0, 127, 0);
-                rect(this.x+this.size*this.pos, this.y,this.size,this.size);
+                rect(this.x + this.size * this.pos, this.y, this.size, this.size);
             }
         } else if (this.color == 2) {
-            if (this.b != undefined) image(this.b, this.x+this.size*this.pos-this.size/2, this.y-this.size/2,this.size,this.size);
+            if (this.b != undefined) image(this.b, this.x + this.size * this.pos - this.size / 2, this.y - this.size / 2, this.size, this.size);
             else {
                 fill(0, 0, 127);
-                rect(this.x+this.size*this.pos, this.y,this.size,this.size);
+                rect(this.x + this.size * this.pos, this.y, this.size, this.size);
             }
         } else {
             fill(255);
-            rect(this.x+this.size*this.pos, this.y,this.size,this.size);
+            rect(this.x + this.size * this.pos, this.y, this.size, this.size);
         }
         pop();
     }

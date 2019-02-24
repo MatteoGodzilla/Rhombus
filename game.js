@@ -11,52 +11,52 @@ class Game {
 
         loadImage(this.defaultpath + 'red.png', image => {
             //success
-            console.log('set red');
+            console.log('Game.js: set red');
             this.m.setr(image);
-        }, () => console.error('failed red'));
+        }, () => console.error('Game.js: failed red'));
 
         loadImage(this.defaultpath + 'green.png', image => {
             //success
-            console.log('set green');
+            console.log('Game.js: set green');
             this.m.setg(image);
-        }, () => console.error('failed green'));
+        }, () => console.error('Game.js: failed green'));
 
         loadImage(this.defaultpath + 'blue.png', image => {
             //success
-            console.log('set blue');
+            console.log('Game.js: set blue');
             this.m.setb(image);
-        }, () => console.error('failed blue'));
+        }, () => console.error('Game.js: failed blue'));
 
         loadImage(this.defaultpath + 'grid.png', image => {
             //success
-            console.log('set grid');
+            console.log('Game.js: set grid');
             this.m.setImage(image);
-        }, () => console.error('failed grid'));
+        }, () => console.error('Game.js: failed grid'));
 
         loadImage(this.defaultpath + 'pred.png', image => {
             //success
-            console.log('set red bucket');
+            console.log('Game.js: set red bucket');
             this.p.setr(image);
-        }, () => console.error('failed red bucket'));
+        }, () => console.error('Game.js: failed red bucket'));
 
         loadImage(this.defaultpath + 'pgreen.png', image => {
             //success
-            console.log('set green bucket');
+            console.log('Game.js: set green bucket');
             this.p.setg(image);
-        }, () => console.error('failed red bucket'));
+        }, () => console.error('Game.js: failed red bucket'));
 
         loadImage(this.defaultpath + 'pblue.png', image => {
             //success
-            console.log('set blue bucket');
+            console.log('Game.js: set blue bucket');
             this.p.setb(image);
-        }, () => console.error('failed red bucket'));
+        }, () => console.error('Game.js: failed red bucket'));
 
     }
     show() {
         this.p.show();
         this.m.show();
     }
-    tick(){
+    tick() {
         this.m.tick();
         this.show();
         this.p.clear();

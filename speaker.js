@@ -1,10 +1,10 @@
 class Speaker {
-    constructor(x, y) {
+    constructor(x, y, vel) {
         this.x = x;
         this.y = y;
         this.r = 60;
         this.thread = undefined;
-        this.vel = 0;
+        this.vel = vel;
         this.games = [];
         this.frame = 0;
     }
@@ -19,26 +19,33 @@ class Speaker {
         }
         pop();
     }
-    start(v) {
+    start() {
         console.log('started');
-        this.vel = v;
-        this.stop();
+        clearInterval(this.thread);
+        this.song.play();
         this.thread = setInterval(() => {
             //function beat
             this.frame = 0;
-            for(let g of this.games){
+            for (let g of this.games) {
                 g.tick();
             }
         }, 60000 / this.vel);
     }
     stop() {
         clearInterval(this.thread);
+        this.song.stop();
+
     }
     addGame(g) {
         this.games.push(g);
     }
-    removeGame(game){
+    removeGame(game) {
         let index = this.games.indexOf(game);
-        this.games.splice(index,1);
+        this.games.splice(index, 1);
+    }
+    load(path) {
+        this.song = loadSound(path, () => this.start(), () => {
+            console.error("Speaker.js: error loading song");
+        });
     }
 }

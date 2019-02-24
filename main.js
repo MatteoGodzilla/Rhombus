@@ -17,18 +17,20 @@ let options2 = {
     },
     path: "res/skin2/"
 };
-
+let test;
 let g = new Game(0, 0, options1);
 let g2 = new Game(360, 0, options2);
-let s = new Speaker(300,150);
+let s = new Speaker(300, 150, 120);
 
 function setup() {
+    test = loadSound('res/song.mp3');
     createCanvas(600, 600);
     g.setup();
     g2.setup();
     s.addGame(g);
     s.addGame(g2);
-    s.start(60); 
+    s.load('res/song.mp3');
+    //s.start(60); 
     /*
     setTimeout(() => {
         stop();
