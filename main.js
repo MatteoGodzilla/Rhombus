@@ -3,7 +3,8 @@ let options1 = {
         left: 'a',
         right: 'd',
         shiftleft: 'w',
-        shiftright: 's'
+        shiftright: 's',
+        meter: 'left'
     },
     path: "res/skin2/"
 };
@@ -13,18 +14,19 @@ let options2 = {
         left: 'ArrowLeft',
         right: 'ArrowRight',
         shiftleft: 'ArrowUp',
-        shiftright: 'ArrowDown'
+        shiftright: 'ArrowDown',
+        meter: 'right'
     },
     path: "res/skin2/"
 };
 let test;
-let g = new Game(0, 0, options1);
-let g2 = new Game(360, 0, options2);
-let s = new Speaker(300, 150, 120);
+let g = new Game(60, 20, options1);
+let g2 = new Game(535, 20, options2);
+let s = new Speaker(400, 150, 120);
 
 function setup() {
     test = loadSound('res/song.mp3');
-    createCanvas(600, 600);
+    createCanvas(800, 600);
     g.setup();
     g2.setup();
     s.addGame(g);
@@ -34,7 +36,7 @@ function setup() {
     /*
     setTimeout(() => {
         stop();
-    }, 10000);  */
+    }, 10000);*/
 }
 
 

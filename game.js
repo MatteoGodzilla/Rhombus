@@ -2,13 +2,16 @@ class Game {
     constructor(x, y, options = {}) {
         this.x = x;
         this.y = y;
-        this.m = new Matrix(this.x + 20, this.y + 20, 5, 10);
-        this.p = new Player(this.x + 78, this.y + 500, options.player);
+        this.active = true;
+        this.m = new Matrix(this.x, this.y, 5, 10);
+        this.p = new Player(this.x + 58, this.y + 480, options.player);
+        if (options.player.meter == 'left') this.meter = new Meter(this.x - 40, this.y + 280, 40, 120);
+        else if (options.player.meter == 'right') this.meter = new Meter(this.x + 200, this.y + 280, 40, 120);
         this.defaultpath = options.path;
     }
     setup() {
         this.p.linkMatrix(this.m);
-
+        this.p.linkMeter(this.meter);
         loadImage(this.defaultpath + 'red.png', image => {
             //success
             console.log('Game.js: set red');
@@ -55,12 +58,17 @@ class Game {
     show() {
         this.p.show();
         this.m.show();
+        this.meter.show();
     }
     tick() {
-        this.m.tick();
-        this.show();
-        this.p.clear();
-        this.show();
+        if (this.active) {
+            this.m.tick();
+            this.show();
+            if (this.m.isliving != false) {
+                this.p.clear();
+                this.show();
+            } else this.active = false;
+        }
     }
 
 

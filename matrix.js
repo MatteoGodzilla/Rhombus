@@ -7,6 +7,7 @@ class Matrix {
 		this.buffer = [0, 1, 2, 3, 4];
 		this.pastCol = 50;
 		this.colSize = 40;
+		this.isliving = true;
 		for (let i = 0; i < this.value.length; i++) {
 			this.value[i] = new Array(cols);
 		}
@@ -45,10 +46,13 @@ class Matrix {
 		if (this.pastCol == newcol) {
 			newcol = this.buffer[0];
 		}
-		let color = floor(random() * 3);
-		this.value[this.buffer[newcol]][0].new = true;
-		this.value[this.buffer[newcol]][0].setblock(color);
-		this.pastCol = newcol;
+		let c = this.value[this.buffer[newcol]][0];
+		if (c.block == -1) {
+			let color = floor(random() * 3);
+			c.new = true;
+			c.setblock(color);
+			this.pastCol = newcol;
+		} else this.isliving = false;
 	}
 	move() {
 		for (let cols = this.value.length - 1; cols >= 0; cols--) {

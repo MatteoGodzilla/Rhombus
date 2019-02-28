@@ -7,6 +7,9 @@ class Player {
         this.buckets = new Array(3);
         this.matrix = undefined;
         this.score = 0;
+        this.combo = 0;
+        this.combovalues = [1, 1, 1, 1, 2, 2, 2, 4];
+        this.meter = undefined;
 
         this.buckets[0] = new Bucket(this.x, this.y - 40, 0);
         this.buckets[1] = new Bucket(this.x + 40, this.y - 40, 1);
@@ -28,8 +31,7 @@ class Player {
             this.pos = 0;
             this.locked = this.moveleftkey;
             this.left();
-        } else
-        if (key == this.moverightkey || keyCode == this.moverightkey) {
+        } else if (key == this.moverightkey || keyCode == this.moverightkey) {
             this.pos = 2;
             this.locked = this.moverightkey;
             this.right();
@@ -56,23 +58,41 @@ class Player {
         textSize(20);
         fill(255);
         textAlign(CENTER);
-        text(this.score, this.x + 40, this.y + 40); //provvisorio
+        text(this.score + '|' + this.combo, this.x + 40, this.y + 40); //provvisorio
         pop();
     }
     clear() {
         if (this.matrix !== undefined) {
+            let now = 0;
+            let mult = 1;
+            if (this.combo < 8) {
+                mult = this.combovalues[this.combo];
+            } else if (this.combo >= 8) {
+                mult = this.combovalues[7];
+            }
+
             for (let i = 0; i < this.buckets.length; i++) {
                 let index = i + this.pos;
                 let b = this.matrix.value[index][9];
                 if (this.buckets[i].color == b.block) {
                     this.matrix.value[index][9].setblock(-1);
-                    this.score += 1;
+                    this.score += 1 * mult;
+                    now++;
                 }
+            }
+            //TODO:meter
+            if (now == 0) {
+                this.combo = 0;
+            } else {
+                this.combo += now;
             }
         }
     }
     linkMatrix(matrix) {
         this.matrix = matrix;
+    }
+    linkMeter(matrix) {
+        this.meter = matrix;
     }
     setr(image) {
         for (let b of this.buckets) {

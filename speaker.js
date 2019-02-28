@@ -6,17 +6,17 @@ class Speaker {
         this.thread = undefined;
         this.vel = vel;
         this.games = [];
-        this.frame = 0;
+        this.amp = new p5.Amplitude();
     }
     show() {
         push();
+        let a = this.amp.getLevel();
+        let off = this.offset(); //tra -1 e 1
+        a = map(a, 0, 1, 0, 50);
         fill(255);
-        if (this.frame <= 10) {
-            ellipse(this.x, this.y, this.r + 10 - this.frame);
-            this.frame++;
-        } else {
-            ellipse(this.x, this.y, this.r);
-        }
+        strokeWeight(4);
+        line(this.x + off * this.r / 2, 0, this.x + off * this.r / 2, width);
+        ellipse(this.x, this.y, a + this.r);
         pop();
     }
     start() {
@@ -25,10 +25,7 @@ class Speaker {
         this.song.play();
         this.thread = setInterval(() => {
             //function beat
-            this.frame = 0;
-            for (let g of this.games) {
-                g.tick();
-            }
+            for (let g of this.games) g.tick();
         }, 60000 / this.vel);
     }
     stop() {
@@ -47,5 +44,15 @@ class Speaker {
         this.song = loadSound(path, () => this.start(), () => {
             console.error("Speaker.js: error loading song");
         });
+    }
+    offset() {
+        let total = 0;
+        for (let g of this.games) {
+            let score = g.p.score;
+            total += score;
+        }
+        let diff = this.games[0].p.score - this.games[1].p.score;
+        if (total == 0) return 0;
+        else return diff / total;
     }
 }
