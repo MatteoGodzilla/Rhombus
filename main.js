@@ -2,8 +2,8 @@ let options1 = {
     player: {
         left: 'a',
         right: 'd',
-        shiftleft: 'w',
-        shiftright: 's',
+        shiftLeft: 'w',
+        shiftRight: 's',
         meter: 'left'
     },
     path: "res/skin2/"
@@ -13,8 +13,8 @@ let options2 = {
     player: {
         left: 'ArrowLeft',
         right: 'ArrowRight',
-        shiftleft: 'ArrowUp',
-        shiftright: 'ArrowDown',
+        shiftLeft: 'ArrowUp',
+        shiftRight: 'ArrowDown',
         meter: 'right'
     },
     path: "res/skin2/"
@@ -48,9 +48,14 @@ function draw() {
 }
 
 function stop() {
-    noLoop();
     console.log("STOP!");
     s.stop();
+}
+
+function startSpeaker(){
+    s.start(60);
+    let button = document.getElementById('start');
+    button.disabled = true;
 }
 
 //debug o creazione grafica

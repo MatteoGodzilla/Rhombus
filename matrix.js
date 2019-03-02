@@ -2,9 +2,8 @@ class Matrix {
 	constructor(x, y, rows, cols) {
 		this.x = x;
 		this.y = y;
-		this.image = undefined;
+		this.background = undefined;
 		this.value = new Array(rows);
-		this.buffer = [0, 1, 2, 3, 4];
 		this.pastCol = 50;
 		this.colSize = 40;
 		this.isliving = true;
@@ -22,8 +21,8 @@ class Matrix {
 	show() {
 		push();
 		translate(this.x, this.y);
-		if (this.image != undefined) {
-			image(this.image, 0, 0, this.width, this.height);
+		if (this.background != undefined) {
+			image(this.background, 0, 0, this.width, this.height);
 		} else {
 			fill(128, 128);
 			rect(0, 0, this.width, this.height);
@@ -40,19 +39,15 @@ class Matrix {
 		this.move();
 	}
 	generate() {
-		this.buffer = [0, 1, 2, 3, 4];
-		this.buffer.splice(this.pastCol, 1);
-		let newcol = floor(random() * (this.value.length - 1));
-		if (this.pastCol == newcol) {
-			newcol = this.buffer[0];
-		}
-		let c = this.value[this.buffer[newcol]][0];
-		if (c.block == -1) {
-			let color = floor(random() * 3);
-			c.new = true;
-			c.setblock(color);
-			this.pastCol = newcol;
-		} else this.isliving = false;
+		let last = this.pastCol;
+		let buffer = [0, 1, 2, 3, 4];
+		buffer.splice(this.pastCol, 1);
+		let choice = floor(random() * buffer.length);
+		let c = this.value[buffer[choice]][0];
+		let block = floor(random() * 3);
+		c.setBlock(block);
+		c.new = true;
+		this.pastCol = buffer[choice];
 	}
 	move() {
 		for (let cols = this.value.length - 1; cols >= 0; cols--) {
@@ -62,40 +57,40 @@ class Matrix {
 				if (current.new == true) {
 					current.new = false;
 				} else if (next.block === -1 && current.block != -1) {
-					next.setblock(current.block);
-					current.setblock(-1);
+					next.setBlock(current.block);
+					current.setBlock(-1);
 				}
 			}
 		}
 	}
-	setr(gr) {
+	setR(gr) {
 		for (let row of this.value) {
 			for (let col of row) {
-				col.setr(gr);
+				col.setR(gr);
 			}
 		}
 	}
-	setg(gr) {
+	setG(gr) {
 		for (let row of this.value) {
 			for (let col of row) {
-				col.setg(gr);
+				col.setG(gr);
 			}
 		}
 	}
-	setb(gr) {
+	setB(gr) {
 		for (let row of this.value) {
 			for (let col of row) {
-				col.setb(gr);
+				col.setB(gr);
 			}
 		}
 	}
-	setImage(Image) {
-		this.image = Image;
+	setBackground(bg) {
+		this.background = bg;
 	}
-	setpadding(value) {
+	setPadding(value) {
 		for (let row of this.value) {
 			for (let c of row) {
-				c.setpadding(value);
+				c.setPadding(value);
 			}
 		}
 	}

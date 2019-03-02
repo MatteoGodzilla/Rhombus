@@ -38,19 +38,19 @@ class Cell {
 		}
 		pop();
 	}
-	setblock(block) {
+	setBlock(block) {
 		this.block = block;
 	}
-	setr(im) {
+	setR(im) {
 		this.r = im;
 	}
-	setg(im) {
+	setG(im) {
 		this.g = im;
 	}
-	setb(im) {
+	setB(im) {
 		this.b = im;
 	}
-	setpadding(value) {
+	setPadding(value) {
 		this.padding = value;
 	}
 }

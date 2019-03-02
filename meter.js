@@ -1,5 +1,5 @@
 class Meter {
-    constructor(x, y, width, height, value = 0.2) {
+    constructor(x, y, width, height, value = 0) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -12,15 +12,15 @@ class Meter {
     show() {
         push();
         fill(this.bg[0], this.bg[1], this.bg[2]);
-        rect(this.x, this.y, this.width, this.height);
+        rect(this.x-1, this.y-1, this.width, this.height);
         fill(this.color[0], this.color[1], this.color[2]);
 
         if (this.direction == 'up') {
             let dist = this.height * this.value;
-            rect(this.x, this.y + this.height, this.width, -dist);
+            rect(this.x-1, this.y + this.height-1, this.width, -dist);
         } else {
             let dist = this.width * this.value;
-            rect(this.x, this.y, dist, this.height);
+            rect(this.x-1, this.y-1, dist, this.height);
         }
         pop();
     }

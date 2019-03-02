@@ -46,13 +46,13 @@ class Bucket {
     center() {
         this.pos = 0;
     }
-    setr(image) {
+    setR(image) {
         this.r = image;
     }
-    setg(image) {
+    setG(image) {
         this.g = image;
     }
-    setb(image) {
+    setB(image) {
         this.b = image;
     }
 }

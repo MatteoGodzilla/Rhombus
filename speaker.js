@@ -4,6 +4,8 @@ class Speaker {
         this.y = y;
         this.r = 60;
         this.thread = undefined;
+        this.song = undefined;
+        this.color = [255,255,255];
         this.vel = vel;
         this.games = [];
         this.amp = new p5.Amplitude();
@@ -13,7 +15,7 @@ class Speaker {
         let a = this.amp.getLevel();
         let off = this.offset(); //tra -1 e 1
         a = map(a, 0, 1, 0, 50);
-        fill(255);
+        fill(this.color[0],this.color[1],this.color[2]);
         strokeWeight(4);
         line(this.x + off * this.r / 2, 0, this.x + off * this.r / 2, width);
         ellipse(this.x, this.y, a + this.r);
@@ -31,27 +33,29 @@ class Speaker {
     stop() {
         clearInterval(this.thread);
         this.song.stop();
-
     }
-    addGame(g) {
-        this.games.push(g);
+    addGame(game) {
+        this.games.push(game);
     }
     removeGame(game) {
         let index = this.games.indexOf(game);
         this.games.splice(index, 1);
     }
     load(path) {
-        this.song = loadSound(path, () => this.start(), () => {
+        this.song = loadSound(path, () => {
+            console.log("Speaker.js: loaded song");
+            this.color = [0,255,0];
+        }, () => {
             console.error("Speaker.js: error loading song");
         });
     }
     offset() {
         let total = 0;
         for (let g of this.games) {
-            let score = g.p.score;
+            let score = g.player.score;
             total += score;
         }
-        let diff = this.games[0].p.score - this.games[1].p.score;
+        let diff = this.games[0].player.score - this.games[1].player.score;
         if (total == 0) return 0;
         else return diff / total;
     }

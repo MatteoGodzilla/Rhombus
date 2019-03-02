@@ -1,24 +1,28 @@
+let left = 0;
+let center = 1;
+let right = 2;
+
 class Player {
     constructor(x, y, options) {
         this.x = x;
         this.y = y;
-        this.pos = 1;
-        this.locked = undefined;
+        this.leftOrRight = 1;
+        this.pastKey = undefined;
         this.buckets = new Array(3);
         this.matrix = undefined;
         this.score = 0;
         this.combo = 0;
-        this.combovalues = [1, 1, 1, 1, 2, 2, 2, 4];
+        this.comboValues = [1, 1, 1, 1, 2, 2, 2, 4];
         this.meter = undefined;
 
         this.buckets[0] = new Bucket(this.x, this.y - 40, 0);
         this.buckets[1] = new Bucket(this.x + 40, this.y - 40, 1);
         this.buckets[2] = new Bucket(this.x + 80, this.y - 40, 2);
 
-        this.moveleftkey = options.left;
-        this.moverightkey = options.right;
-        this.shiftleft = options.shiftleft;
-        this.shiftright = options.shiftright;
+        this.moveLeftKey = options.left;
+        this.moveRightKey = options.right;
+        this.shiftLeftKey = options.shiftLeft;
+        this.shiftRightKey = options.shiftRight;
 
         document.body.addEventListener('keydown', ev => this.kd(ev), false);
         document.body.addEventListener('keyup', ev => this.ku(ev), false);
@@ -27,64 +31,71 @@ class Player {
     kd(ev) {
         let key = ev.key;
         let keyCode = ev.code;
-        if (key == this.moveleftkey || keyCode == this.moveleftkey) {
-            this.pos = 0;
-            this.locked = this.moveleftkey;
-            this.left();
-        } else if (key == this.moverightkey || keyCode == this.moverightkey) {
-            this.pos = 2;
-            this.locked = this.moverightkey;
-            this.right();
+        if (key == this.moveLeftKey || keyCode == this.moveLeftKey) {
+            this.leftOrRight = left;
+            this.pastKey = this.moveLeftKey;
+            this.bucketLeft();
+        } else if (key == this.moveRightKey || keyCode == this.moveRightKey) {
+            this.leftOrRight = right;
+            this.pastKey = this.moveRightKey;
+            this.bucketRight();
         }
-        if (key == this.shiftleft || keyCode == this.shiftleft) {
-            this.rotl();
-        } else if (key == this.shiftright || keyCode == this.shiftright) {
-            this.rotr();
+        if (key == this.shiftLeftKey || keyCode == this.shiftLeftKey) {
+            this.shiftLeft();
+        } else if (key == this.shiftRightKey || keyCode == this.shiftRightKey) {
+            this.shiftRight();
         }
     }
 
     ku(ev) {
         let key = ev.key;
-        if (key == this.locked) {
-            this.pos = 1;
-            this.locked = undefined;
-            this.center();
+        let keyCode = ev.code;
+        if (key == this.pastKey || keyCode == this.moveLeftKey) {
+            this.leftOrRight = center;
+            this.pastKey = undefined;
+            this.bucketCenter();
         }
     }
     show() {
         push();
-        ellipse(this.x + this.pos * 40, this.y, 40, 40);
+        ellipse(this.x + this.leftOrRight * 40, this.y, 40, 40);
         for (let bucket of this.buckets) bucket.show();
         textSize(20);
         fill(255);
         textAlign(CENTER);
-        text(this.score + '|' + this.combo, this.x + 40, this.y + 40); //provvisorio
+        text(this.score, this.x + 40, this.y + 40);
         pop();
     }
     clear() {
         if (this.matrix !== undefined) {
-            let now = 0;
+            let bucketsClearedinCycle = 0;
             let mult = 1;
             if (this.combo < 8) {
-                mult = this.combovalues[this.combo];
+                mult = this.comboValues[this.combo];
             } else if (this.combo >= 8) {
-                mult = this.combovalues[7];
+                mult = this.comboValues[7];
             }
 
             for (let i = 0; i < this.buckets.length; i++) {
-                let index = i + this.pos;
+                let index = i + this.leftOrRight;
                 let b = this.matrix.value[index][9];
                 if (this.buckets[i].color == b.block) {
-                    this.matrix.value[index][9].setblock(-1);
+                    this.matrix.value[index][9].setBlock(-1);
                     this.score += 1 * mult;
-                    now++;
+                    bucketsClearedinCycle++;
                 }
             }
-            //TODO:meter
-            if (now == 0) {
+            if (bucketsClearedinCycle == 0) {
                 this.combo = 0;
             } else {
-                this.combo += now;
+                this.combo += bucketsClearedinCycle;
+            }
+            if (this.meter != undefined) {
+                if (this.combo < 8) {
+                    this.meter.setvalue(this.combo / this.comboValues.length);
+                } else if (this.combo >= 8) {
+                    this.meter.setvalue(1);
+                }
             }
         }
     }
@@ -94,40 +105,40 @@ class Player {
     linkMeter(matrix) {
         this.meter = matrix;
     }
-    setr(image) {
+    setR(image) {
         for (let b of this.buckets) {
-            b.setr(image);
+            b.setR(image);
         }
     }
-    setg(image) {
+    setG(image) {
         for (let b of this.buckets) {
-            b.setg(image);
+            b.setG(image);
         }
     }
-    setb(image) {
+    setB(image) {
         for (let b of this.buckets) {
-            b.setb(image);
+            b.setB(image);
         }
     }
-    rotr() {
+    shiftRight() {
         let temp = this.buckets[2].color;
         this.buckets[2].color = this.buckets[1].color;
         this.buckets[1].color = this.buckets[0].color;
         this.buckets[0].color = temp;
     }
-    rotl() {
+    shiftLeft() {
         let temp = this.buckets[0].color;
         this.buckets[0].color = this.buckets[1].color;
         this.buckets[1].color = this.buckets[2].color;
         this.buckets[2].color = temp;
     }
-    right() {
+    bucketRight() {
         for (let bucket of this.buckets) bucket.right();
     }
-    left() {
+    bucketLeft() {
         for (let bucket of this.buckets) bucket.left();
     }
-    center() {
+    bucketCenter() {
         for (let bucket of this.buckets) bucket.center();
     }
 }
