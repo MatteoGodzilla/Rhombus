@@ -1,4 +1,5 @@
-let options1 = {
+
+let g = new Game(60, 20, {
     player: {
         left: 'a',
         right: 'd',
@@ -7,9 +8,9 @@ let options1 = {
         meter: 'left'
     },
     path: "res/skin2/"
-};
+});
 
-let options2 = {
+let g2 = new Game(535, 20,{ 
     player: {
         left: 'ArrowLeft',
         right: 'ArrowRight',
@@ -18,14 +19,10 @@ let options2 = {
         meter: 'right'
     },
     path: "res/skin2/"
-};
-let test;
-let g = new Game(60, 20, options1);
-let g2 = new Game(535, 20, options2);
+});
 let s = new Speaker(400, 150, 120);
 
 function setup() {
-    test = loadSound('res/song.mp3');
     createCanvas(800, 600);
     g.setup();
     g2.setup();

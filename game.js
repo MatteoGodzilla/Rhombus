@@ -4,7 +4,7 @@ class Game {
         this.y = y;
         this.active = true;
         this.matrix = new Matrix(this.x, this.y, 5, 10);
-        this.player = new Player(this.x + 58, this.y + 480, options.player);
+        this.player = new Player(this.x + 60, this.y + this.matrix.height+80, options.player);
         if (options.player.meter == 'left') this.meter = new Meter(this.x - 40, this.y + 280, 40, 120);
         else if (options.player.meter == 'right') this.meter = new Meter(this.x + 200, this.y + 280, 40, 120);
         this.defaultPath = options.path;
@@ -70,6 +70,5 @@ class Game {
             } else this.active = false;
         }
     }
-
 
 }

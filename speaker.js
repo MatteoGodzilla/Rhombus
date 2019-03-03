@@ -13,11 +13,13 @@ class Speaker {
     show() {
         push();
         let a = this.amp.getLevel();
-        let off = this.offset(); //tra -1 e 1
         a = map(a, 0, 1, 0, 50);
         fill(this.color[0],this.color[1],this.color[2]);
-        strokeWeight(4);
-        line(this.x + off * this.r / 2, 0, this.x + off * this.r / 2, width);
+        strokeWeight(2);
+        if(this.games.length == 2){
+            let off = this.offset(); //tra -1 e 1
+            line(this.x + off * this.r / 2, 0, this.x + off * this.r / 2, width);
+        }
         ellipse(this.x, this.y, a + this.r);
         pop();
     }

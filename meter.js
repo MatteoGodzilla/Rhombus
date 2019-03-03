@@ -11,6 +11,7 @@ class Meter {
     }
     show() {
         push();
+        stroke(0);
         fill(this.bg[0], this.bg[1], this.bg[2]);
         rect(this.x-1, this.y-1, this.width, this.height);
         fill(this.color[0], this.color[1], this.color[2]);
