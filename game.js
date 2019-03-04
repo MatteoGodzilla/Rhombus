@@ -1,13 +1,17 @@
 class Game {
-    constructor(x, y, options = {}) {
+    constructor(x, y, options) {
         this.x = x;
         this.y = y;
         this.active = true;
-        this.matrix = new Matrix(this.x, this.y, 5, 10);
-        this.player = new Player(this.x + 60, this.y + this.matrix.height+80, options.player);
-        if (options.player.meter == 'left') this.meter = new Meter(this.x - 40, this.y + 280, 40, 120);
-        else if (options.player.meter == 'right') this.meter = new Meter(this.x + 200, this.y + 280, 40, 120);
         this.defaultPath = options.path;
+        if(options.size != undefined)this.size = options.size;
+        else this.size = 40;
+
+        this.matrix = new Matrix(this.x, this.y, 5, 10, this.size);
+        this.player = new Player(this.x + this.size, this.y + this.matrix.height + this.size * 2, options.player, this.size);
+        if (options.player.meter == 'left') this.meter = new Meter(this.x - this.size, this.y + this.matrix.height - this.size * 3, this.size, this.size * 3);
+        else if (options.player.meter == 'right') this.meter = new Meter(this.x + this.size * 5, this.y + +this.matrix.height - this.size * 3, this.size, this.size * 3);
+
     }
     setup() {
         this.player.linkMatrix(this.matrix);

@@ -3,7 +3,7 @@ let center = 1;
 let right = 2;
 
 class Player {
-    constructor(x, y, options) {
+    constructor(x, y, options, size = 40) {
         this.x = x;
         this.y = y;
         this.leftOrRight = 1;
@@ -14,10 +14,11 @@ class Player {
         this.combo = 0;
         this.comboValues = [1, 1, 1, 1, 2, 2, 2, 4];
         this.meter = undefined;
+        this.size = size;
 
-        this.buckets[0] = new Bucket(this.x, this.y - 40, 0);
-        this.buckets[1] = new Bucket(this.x + 40, this.y - 40, 1);
-        this.buckets[2] = new Bucket(this.x + 80, this.y - 40, 2);
+        this.buckets[0] = new Bucket(this.x, this.y - this.size, 0, this.size);
+        this.buckets[1] = new Bucket(this.x + this.size, this.y - this.size, 1, this.size);
+        this.buckets[2] = new Bucket(this.x + this.size * 2, this.y - this.size, 2, this.size);
 
         this.moveLeftKey = options.left;
         this.moveRightKey = options.right;
@@ -58,12 +59,13 @@ class Player {
     }
     show() {
         push();
-        ellipse(this.x + this.leftOrRight * 40, this.y, 40, 40);
+        ellipse(this.x + this.leftOrRight * this.size * 1.5, this.y + this.size / 2, this.size, this.size);
         for (let bucket of this.buckets) bucket.show();
-        textSize(20);
+        textSize(this.size / 2);
         fill(255);
         textAlign(CENTER);
-        text(this.score, this.x + 40, this.y + 40);
+        stroke(0);
+        text(this.score, this.x + this.size * 1.5, this.y + this.size * 1.5);
         pop();
     }
     clear() {

@@ -1,9 +1,9 @@
 class Cell {
-	constructor(x, y) {
+	constructor(x, y,size = 40) {
 		this.x = x;
 		this.y = y;
 		this.block = -1;
-		this.size = 40;
+		this.size = size;
 		this.r = undefined;
 		this.g = undefined;
 		this.b = undefined;

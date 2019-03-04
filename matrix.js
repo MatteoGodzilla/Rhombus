@@ -1,18 +1,18 @@
 class Matrix {
-	constructor(x, y, rows, cols) {
+	constructor(x, y, rows, cols, size = 40) {
 		this.x = x;
 		this.y = y;
 		this.background = undefined;
 		this.value = new Array(rows);
 		this.pastCol = 50;
-		this.colSize = 40;
+		this.colSize = size;
 		this.isliving = true;
 		for (let i = 0; i < this.value.length; i++) {
 			this.value[i] = new Array(cols);
 		}
 		for (let i = 0; i < this.value.length; i++) {
 			for (let j = 0; j < this.value[0].length; j++) {
-				this.value[i][j] = new Cell(i * this.colSize, j * this.colSize);
+				this.value[i][j] = new Cell(i * this.colSize, j * this.colSize,this.colSize);
 			}
 		}
 		this.width = this.value[0][0].size * this.value.length;

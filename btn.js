@@ -31,12 +31,12 @@ class Btn {
     up(ev) {
         let active = false;
         for (let t of ev.touches) {
-            if(t.identifier == this.pressed)active = true;
+            if (t.identifier == this.pressed) active = true;
         }
-        if(!active){
+        if (!active) {
             this.pressed = false;
             this.game.player.ku({
-                key:this.eventName
+                key: this.eventName
             });
         }
     }

@@ -47,6 +47,7 @@ class Speaker {
         this.song = loadSound(path, () => {
             console.log("Speaker.js: loaded song");
             this.color = [0,255,0];
+            this.start();
         }, () => {
             console.error("Speaker.js: error loading song");
         });

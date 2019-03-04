@@ -18,7 +18,7 @@ let g2 = new Game(535, 20,{
         shiftRight: 'ArrowDown',
         meter: 'right'
     },
-    path: "res/skin2/"
+    path: "res/skin2/",
 });
 let s = new Speaker(400, 150, 120);
 
@@ -50,7 +50,7 @@ function stop() {
 }
 
 function startSpeaker(){
-    s.start(60);
+    s.start();
     let button = document.getElementById('start');
     button.disabled = true;
 }
