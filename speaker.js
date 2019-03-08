@@ -13,7 +13,7 @@ class Speaker {
     show() {
         push();
         let a = this.amp.getLevel();
-        a = map(a, 0, 1, 0, 50);
+        a = map(a, 0, 1, 0, this.r*2);
         fill(this.color[0],this.color[1],this.color[2]);
         strokeWeight(2);
         if(this.games.length == 2){

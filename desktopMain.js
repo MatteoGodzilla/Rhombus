@@ -20,7 +20,7 @@ let g2 = new Game(535, 20,{
     },
     path: "res/skin2/",
 });
-let s = new Speaker(400, 150, 120);
+let s = new Speaker(400, 150, 60);
 
 function setup() {
     createCanvas(800, 600);

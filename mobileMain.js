@@ -26,9 +26,9 @@ if (w >= 700) {
     options.size = 60;
 } else if (w >= 1080) options.size = 80;
 
-let g = new Game((w - options.size * 5) / 2, (h - options.size * 8) / 4, options);
+let g = new Game((w - options.size * 5) / 2, (h -options.size * 13-buttons[0].height) / 2, options);
 let rightMargin = w - g.x - g.matrix.width;
-let s = new Speaker(w - rightMargin / 2, h / 4,120);
+let s = new Speaker(w - rightMargin / 2, h / 4,40);
 
 function setup() {
     createCanvas(w, h);
@@ -45,4 +45,22 @@ function draw() {
     g.show();
     s.show();
     pop();
+}
+
+document.body.addEventListener('touchstart',ev=>{
+    //touch down
+    for(let b of buttons){
+        b.down(ev);
+    }
+});
+
+document.body.addEventListener('touchend',ev=>{
+    //touch down
+    for(let b of buttons){
+        b.up(ev);
+    }
+});
+
+function stop(){
+    s.stop();
 }

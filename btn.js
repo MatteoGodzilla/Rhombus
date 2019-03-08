@@ -7,8 +7,6 @@ class Btn {
         this.eventName = eventName;
         this.pressed = false;
         this.game = undefined;
-        document.body.addEventListener('touchstart', ev => this.down(ev));
-        document.body.addEventListener('touchend', ev => this.up(ev));
     }
     show() {
         push();

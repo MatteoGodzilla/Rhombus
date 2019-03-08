@@ -59,7 +59,7 @@ class Player {
     }
     show() {
         push();
-        ellipse(this.x + this.leftOrRight * this.size * 1.5, this.y + this.size / 2, this.size, this.size);
+        ellipse(this.x + this.leftOrRight * this.size+this.size/2, this.y + this.size / 2, this.size, this.size);
         for (let bucket of this.buckets) bucket.show();
         textSize(this.size / 2);
         fill(255);
