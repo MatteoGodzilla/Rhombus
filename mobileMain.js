@@ -18,7 +18,7 @@ let options = {
         shiftRight: buttons[3].eventName,
         meter: 'left'
     },
-    path: 'res/skin2/',
+    path: 'res/skin/',
     size: 40
 };
 

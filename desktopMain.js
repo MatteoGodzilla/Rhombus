@@ -7,7 +7,7 @@ let g = new Game(60, 20, {
         shiftRight: 's',
         meter: 'left'
     },
-    path: "res/skin2/"
+    path: "res/skin/"
 });
 
 let g2 = new Game(535, 20,{ 
@@ -18,7 +18,7 @@ let g2 = new Game(535, 20,{
         shiftRight: 'ArrowDown',
         meter: 'right'
     },
-    path: "res/skin2/",
+    path: "res/skin/",
 });
 let s = new Speaker(400, 150, 60);
 
