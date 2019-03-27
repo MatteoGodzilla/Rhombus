@@ -10,8 +10,8 @@ class Game {
 
         this.matrix = new Matrix(this.x, this.y, 5, 10, this.size);
         this.player = new Player(this.x + this.size, this.y + this.matrix.height + this.size * 2, options.player, this.size);
-        if (options.player.meter == 'left') this.meter = new Meter(this.x - this.size, this.y + this.matrix.height - this.size * 4-1, this.size, this.size * 4);
-        else if (options.player.meter == 'right') this.meter = new Meter(this.x + this.size * 5, this.y + this.matrix.height - this.size * 4-1, this.size, this.size * 4);
+        if (options.player.meter == 'left') this.meter = new Meter(this.x - this.size, this.y + this.matrix.height - this.size * 3 - 1, this.size, this.size * 3);
+        else if (options.player.meter == 'right') this.meter = new Meter(this.x + this.size * 5, this.y + this.matrix.height - this.size * 3 - 1, this.size, this.size * 3);
 
     }
     setup() {
@@ -41,6 +41,12 @@ class Game {
             this.matrix.setBackground(image);
         });
 
+        loadImage(this.defaultPath + 'death.png', image => {
+            //success
+            console.log('Game.js: set death image');
+            this.matrix.setDeathImage(image);
+        });
+
         loadImage(this.defaultPath + 'pred.png', image => {
             //success
             console.log('Game.js: set red bucket');
@@ -60,35 +66,31 @@ class Game {
         });
 
         if (this.options.player.meter == 'right') {
-            loadImage(this.defaultPath + 'comboBGRight.png', image => {
+            loadImage(this.defaultPath + 'comboRight.png', image => {
                 //success
                 console.log('Game.js: set meter bg');
                 this.meter.setbg(image);
             });
-        }else if (this.options.player.meter == 'left'){
-            loadImage(this.defaultPath + 'comboBGLeft.png', image => {
+        } else if (this.options.player.meter == 'left') {
+            loadImage(this.defaultPath + 'comboLeft.png', image => {
                 //success
                 console.log('Game.js: set meter bg');
                 this.meter.setbg(image);
             });
         }
-
-
     }
+
     show() {
+        this.meter.show();
         this.player.show();
         this.matrix.show();
-        this.meter.show();
     }
     tick() {
-        if (this.active) {
-            this.matrix.tick();
-            this.show();
-            if (this.matrix.isliving != false) {
-                this.player.clear();
-                this.show();
-            } else this.active = false;
-        }
+        this.matrix.tick();
+        this.show();
+        this.player.clear();
+        this.show();
+
     }
 
 }

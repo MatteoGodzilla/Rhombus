@@ -6,13 +6,15 @@ class Matrix {
 		this.value = new Array(rows);
 		this.pastCol = 50;
 		this.colSize = size;
-		this.isliving = true;
+		this.dead = false;
+		this.deathImage = undefined;
+
 		for (let i = 0; i < this.value.length; i++) {
 			this.value[i] = new Array(cols);
 		}
 		for (let i = 0; i < this.value.length; i++) {
 			for (let j = 0; j < this.value[0].length; j++) {
-				this.value[i][j] = new Cell(i * this.colSize, j * this.colSize,this.colSize);
+				this.value[i][j] = new Cell(i * this.colSize, j * this.colSize, this.colSize);
 			}
 		}
 		this.width = this.value[0][0].size * this.value.length;
@@ -32,11 +34,18 @@ class Matrix {
 				this.value[cols][rows].show();
 			}
 		}
+		if (this.dead == true && this.deathImage != undefined) {
+			imageMode(CENTER);
+			image(this.deathImage, this.width/2,this.height/2,this.colSize*5,this.colSize*5);
+		}
 		pop();
 	}
 	tick() {
-		this.generate();
-		this.move();
+		this.chechLife();
+		if (this.dead != true) {
+			this.generate();
+			this.move();
+		}
 	}
 	generate() {
 		let last = this.pastCol;
@@ -63,6 +72,20 @@ class Matrix {
 			}
 		}
 	}
+	chechLife() {
+		let sum = 0;
+		let total = 0;
+		for (let col of this.value) {
+			for (let cell of col) {
+				if (cell.block != -1) sum++;
+				total++;
+			}
+		}
+		if ((sum / total) >= 0.9) {
+			this.dead = true;
+			console.log('ded');
+		}
+	}
 	setR(gr) {
 		for (let row of this.value) {
 			for (let col of row) {
@@ -86,6 +109,9 @@ class Matrix {
 	}
 	setBackground(bg) {
 		this.background = bg;
+	}
+	setDeathImage(i) {
+		this.deathImage = i;
 	}
 	setPadding(value) {
 		for (let row of this.value) {

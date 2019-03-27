@@ -11,16 +11,14 @@ class Meter {
     }
     show() {
         push();
-        if (this.bg == undefined) {
-            stroke(0);
-            fill(this.colorbg[0], this.colorbg[1], this.colorbg[2]);
-            rect(this.x - 1, this.y - 1, this.width, this.height);
-            fill(this.color[0], this.color[1], this.color[2]);
-
-            let dist = this.height * this.value;
-            rect(this.x - 1, this.y + this.height - 1, this.width, -dist);
-        } else if (this.bg != undefined) {
-            image(this.bg, this.x, this.y, this.width, this.height);
+        stroke(0);
+        fill(this.colorbg[0], this.colorbg[1], this.colorbg[2]);
+        rect(this.x - 1, this.y - 1, this.width, this.height);
+        fill(this.color[0], this.color[1], this.color[2]);
+        let dist = this.height * this.value;
+        rect(this.x - 1, this.y + this.height - 1, this.width, -dist);
+        if (this.bg != undefined) {
+            image(this.bg, this.x, this.y - this.height / 3, this.width, this.width);
         }
         pop();
     }
