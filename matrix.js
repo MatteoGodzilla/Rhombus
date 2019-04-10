@@ -83,7 +83,6 @@ class Matrix {
 		}
 		if ((sum / total) >= 0.9) {
 			this.dead = true;
-			console.log('ded');
 		}
 	}
 	setR(gr) {

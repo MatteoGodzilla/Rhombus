@@ -1,4 +1,3 @@
-
 let g = new Game(60, 20, {
     player: {
         left: 'a',
@@ -20,16 +19,15 @@ let g2 = new Game(535, 20,{
     },
     path: "res/skin/",
 });
-let s = new Speaker(400, 150, 60);
-
+let s = new Speaker(400, 150);
+let c;
 function setup() {
-    createCanvas(800, 600);
+    c = createCanvas(800, 600);
     g.setup();
     g2.setup();
     s.addGame(g);
     s.addGame(g2);
-    s.load('res/song.mp3');
-    //s.start(60); 
+    s.load('res/song.mp3',120);
     /*
     setTimeout(() => {
         stop();
