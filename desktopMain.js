@@ -6,7 +6,7 @@ let g = new Game(60, 20, {
         shiftRight: 's',
         meter: 'left'
     },
-    path: "res/skin/"
+    path: "res/skin/",
 });
 
 let g2 = new Game(535, 20,{ 
@@ -25,9 +25,11 @@ function setup() {
     c = createCanvas(800, 600);
     g.setup();
     g2.setup();
+    g.enemy = g2;
+    g2.enemy = g;
     s.addGame(g);
     s.addGame(g2);
-    s.load('res/song.mp3',120);
+    s.load('res/song.mp3',60);
     /*
     setTimeout(() => {
         stop();

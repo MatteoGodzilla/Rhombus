@@ -5,6 +5,10 @@ class Game {
         this.active = true;
         this.defaultPath = options.path;
         this.options = options;
+        this.damage = 0;
+        this.enemy = undefined;
+        this.clearDamageThread = undefined;
+
         if (options.size != undefined) this.size = options.size;
         else this.size = 40;
 
@@ -86,11 +90,30 @@ class Game {
         this.matrix.show();
     }
     tick() {
-        this.matrix.tick();
-        this.show();
-        this.player.clear();
-        this.show();
-
+        if (this.damage == 0) {
+            this.matrix.tick();
+            this.show();
+            this.player.clear();
+            this.show();
+            this.sendDamage(this.player.sendattack);
+        } else {
+            if (this.clearDamageThread == undefined) {
+                this.clearDamageThread = setInterval(() => {
+                    if (this.damage > 0) {
+                        this.matrix.tick();
+                        this.show();
+                        this.damage--;
+                    } else {
+                        clearInterval(this.clearDamageThread);
+                        this.clearDamageThread = undefined;
+                    }
+                }, 100);
+            }
+        }
     }
 
+    sendDamage(damage) {
+        if (this.enemy != undefined)
+            this.enemy.damage = damage;
+    }
 }

@@ -12,6 +12,8 @@ class Player {
         this.matrix = undefined;
         this.score = 0;
         this.combo = 0;
+        this.pastCombo = 0;
+        this.sendattack = 0;
         this.comboValues = [1, 1, 1, 1, 2, 2, 2, 4];
         this.meter = undefined;
         this.size = size;
@@ -59,13 +61,13 @@ class Player {
     }
     show() {
         push();
-        ellipse(this.x + this.leftOrRight * this.size+this.size/2, this.y + this.size / 2, this.size, this.size);
+        ellipse(this.x + this.leftOrRight * this.size + this.size / 2, this.y + this.size / 2, this.size, this.size);
         for (let bucket of this.buckets) bucket.show();
         textSize(this.size / 2);
         fill(255);
         textAlign(CENTER);
         stroke(0);
-        text(this.score, this.x + this.size * 1.5, this.y + this.size * 1.5);
+        text(this.score+"|"+this.combo, this.x + this.size * 1.5, this.y + this.size * 1.5);
         pop();
     }
     clear() {
@@ -88,10 +90,12 @@ class Player {
                 }
             }
             if (bucketsClearedinCycle == 0) {
+                this.sendattack = this.combo;
                 this.combo = 0;
             } else {
                 this.combo += bucketsClearedinCycle;
             }
+
             if (this.meter != undefined) {
                 if (this.combo < 8) {
                     this.meter.setvalue(this.combo / this.comboValues.length);

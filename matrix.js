@@ -48,7 +48,6 @@ class Matrix {
 		}
 	}
 	generate() {
-		let last = this.pastCol;
 		let buffer = [0, 1, 2, 3, 4];
 		buffer.splice(this.pastCol, 1);
 		let choice = floor(random() * buffer.length);
